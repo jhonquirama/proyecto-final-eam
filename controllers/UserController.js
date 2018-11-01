@@ -1,10 +1,9 @@
+let User = require('../models/User')
 
- let Place = require('../models/Place')
-
-let PlaceController = {
-    //listar todos los lugares
+let UserController = {
+    //listar todos los usuarios
     show(req, res) {
-        Place.find({})
+        User.find({})
             .then(docs => {
                 res.json(docs)
             }).catch(err => {
@@ -12,9 +11,9 @@ let PlaceController = {
             })
     }
     ,
-    //buscar lugar por id
+    //buscar usuario por id
     find(req,res){
-        Place.findById({
+        User.findById({
             _id: req.params.id
         })
         .then(doc => {
@@ -23,9 +22,9 @@ let PlaceController = {
             res.json(err)
         })
     },
-//eliminar un lugar
+//eliminar un usuario
     destroy(req,res){
-        Place.findByIdAndRemove({
+        User.findByIdAndRemove({
             _id: req.params.id
         })
         .then(doc => {
@@ -34,14 +33,16 @@ let PlaceController = {
             res.json(err)
         })
     },
-    //actualizar un  lugar
+    //actualizar un  usuario
     update(req,res){
-        Place.update({
+        User.update({
             _id: req.params.id
         },{
-            name:req.body.name,
-            description:req.body.description,
-            location:req.body.location
+            nombre:req.body.nombre,
+            apellido:req.body.apellido,
+            cedula:req.body.cedula,
+            fechanaci:req.body.fechanaci,
+            direccion:req.body.direccion
         })
         .then(doc => {
             res.json(doc)
@@ -49,12 +50,14 @@ let PlaceController = {
             res.json(err)
         })
     },
-    //crear lugares
+    //crear usuarios
     store(req, res) {
-        Place.create({
-            name: req.body.name,
-            description: req.body.description,
-            location: req.body.location
+        User.create({
+            nombre:req.body.nombre,
+            apellido:req.body.apellido,
+            cedula:req.body.cedula,
+            fechanaci:req.body.fechanaci,
+            direccion:req.body.direccion
         }).then(doc => {
             res.json(doc)
         }).catch(err => {
@@ -64,4 +67,4 @@ let PlaceController = {
 
 }
 
-module.exports = PlaceController;
+module.exports = UserController;
